@@ -89,8 +89,8 @@ public class ParallelReportBuilder {
         // - safely record that one more batch has been processed
         // - you have to use streams here
 
-    batches.stream()
-            . summaryStatistics()
+    //batches.stream()
+            //. summaryStatistics();
         long totalAmount = 0;
         long totalCount = 0;
         int globalMax = Integer.MIN_VALUE;
@@ -103,7 +103,8 @@ public class ParallelReportBuilder {
         // TODO 2E: shut down any concurrency resources you created
         pool.shutdown();
         // TODO 2F: return the completed ReportSummary
-        return ReportSummary; //placeholder
+       // return ReportSummary;
+        return null;
     }
 
     /*

@@ -72,12 +72,13 @@ public class TaskDispatcher {
 
     public List<Future<String>> dispatch(List<String> tasks) {
         // TODO 3
-        List<Future<String>> f = results.stream().
+       // List<Future<String>> f = results.stream();
 
-                map(t -> t.toUpperCase())
-                .forEach( p ->recordResult(p));
+               // map(t -> t.toUpperCase())
+               // .forEach( p ->recordResult(p));
 
-        return f;
+       // return f;
+        return null;
     }
     public synchronized void   recordResult(String result) {
         //TODO 4

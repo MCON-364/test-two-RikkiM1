@@ -6,8 +6,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static jdk.vm.ci.code.CodeUtil.K;
-import static jdk.vm.ci.riscv64.RISCV64.CPUFeature.V;
+
 
 /**
  * ══════════════════════════════════════════════════════════════
@@ -58,12 +57,12 @@ public class InventoryManager {
 
     // TODO: initialise this field with a thread-safe Map implementation
     //       — which Map implementation from the lesson guarantees thread-safe reads and writes?
-private final Map stock= new concurrent.HashMap;
+    //I wanted to use a concurrent map but I did not know the excat syntax to I commented it out for compilitaion errors
+//private final Map stock= new concurrent.HashMap();
 
     // TODO: declare and initialise a private final field called totalUnitsAdded that tracks the
     //       running total of units ever added, thread-safely, without using synchronized
-AtomicInteger totalUnitsAdded = new AtomicInteger(0);
-
+    AtomicInteger totalUnitsAdded = new AtomicInteger(0);
 
 
     /**
@@ -78,12 +77,8 @@ AtomicInteger totalUnitsAdded = new AtomicInteger(0);
         if (qty <= 0)
             throw new IllegalArgumentException();
 
-            // TODO: atomically add qty to the item's current stock
-        stock = stock + qty;
-
-
-
-
+        // TODO: atomically add qty to the item's current stock
+        //stock = stock + qty;
 
 
         //       Hint: the thread-safe Map implementation you chose has a merge() method
@@ -104,22 +99,24 @@ AtomicInteger totalUnitsAdded = new AtomicInteger(0);
     public boolean removeStock(String item, int qty) {
         // TODO: validate qty > 0
 
-while(qty>0)
-        // TODO: atomically check-and-decrement.
+        while (qty > 0)
+            // TODO: atomically check-and-decrement.
 
-        //       If current stock >= qty, subtract qty.
-        //       Otherwise, leave stock unchanged.
-        //       Return true if stock was depleted, false if unchanged
-        //       Hint: your chosen Map has a compute() method that lets you
-        //             read and write in one atomic step.
-    if(stock>=qty){
-        qty--;
-        return true;
+            //       If current stock >= qty, subtract qty.
+            //       Otherwise, leave stock unchanged.
+            //       Return true if stock was depleted, false if unchanged
+            //       Hint: your chosen Map has a compute() method that lets you
+            //             read and write in one atomic step.
+            //if(stock>=qty){
+            //qty--;
+            //return true;
+            //}
+
+
+            return false; //placeholder
+    return true;
     }
 
-
-        return false; //placeholder
-    }
 
     /**
      * Returns the current stock for {@code item}, or 0 if unknown.
@@ -141,16 +138,16 @@ while(qty>0)
      */
     public Map<String, Integer> getSnapshot() {
         // TODO: return a defensive copy
-      return new Map<String, Integer> (totalUnitsAdded);
+        return null;
+      //return new Map<String, Integer> (totalUnitsAdded);
     }
     public List<String> getResults() {
         //TODO 6
         totalUnitsAdded.get();
 
 
-
-}
-
+        return List.of();
+    }
 
 }
 
