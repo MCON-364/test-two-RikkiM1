@@ -2,6 +2,8 @@ package edu.touro.las.mcon364.test2;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -48,7 +50,8 @@ public class ParallelReportBuilder {
 
 
     // TODO 1: declare and initialize private thread-safe progress tracking state called numberOfBatchesProcessed
-    
+    private final AtomicInteger numberOfBatchesProcessed = new AtomicInteger(0);
+
     /*
      * TODO 2 — generateReport(List<List<Transaction>> batches, int workers)
      *
@@ -79,13 +82,15 @@ public class ParallelReportBuilder {
 
         // TODO 2B: create the concurrency structure needed for the pattern you chose
 
-
+        ExecutorService pool = Executors.newFixedThreadPool(workers);
         // TODO 2C: submit or assign one unit of work per batch
         // Each unit of work should:
         // - compute BatchStats for that batch
         // - safely record that one more batch has been processed
         // - you have to use streams here
 
+    //batches.stream()
+            //. summaryStatistics();
         long totalAmount = 0;
         long totalCount = 0;
         int globalMax = Integer.MIN_VALUE;
@@ -96,17 +101,19 @@ public class ParallelReportBuilder {
         // you don't have to use streams here. In this case for loop is acceptable
 
         // TODO 2E: shut down any concurrency resources you created
-
+        pool.shutdown();
         // TODO 2F: return the completed ReportSummary
-        return null; //placeholder
+       // return ReportSummary;
+        return null;
     }
 
     /*
      * TODO 3 — getProcessedBatchCount()
      *
+     *
      * Return the current number of batches processed.
      */
     public int getProcessedBatchCount() {
-       return 0; //placeholder
+       return numberOfBatchesProcessed.get();
     }
 }
